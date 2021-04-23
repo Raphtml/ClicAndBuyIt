@@ -1,1 +1,20 @@
 @import "~bootstrap/scss/bootstrap";
+
+.nav-logo{
+  width: 50px;
+}
+
+.btn-connect, .btn-register{
+  margin-right: 30px;
+}
+
+.links{
+  margin-left: auto;
+}
+
+@media screen and  (min-width: 100px) and (max-width: 992px){
+  .btn-connect, .btn-register{
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
