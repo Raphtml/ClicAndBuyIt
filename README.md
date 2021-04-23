@@ -16,6 +16,6 @@
 docker compose up -d
 symfony serve -d
 symfony console doctrine:database:create
-symfony console doctrine:migration:migrate
+symfony console doctrine:migrations:migrate
 symfony console doctrine:fixtures:load
 ````
