@@ -4,7 +4,7 @@
   width: 50px;
 }
 
-.btn-connect, .btn-register{
+.btn-connect{
   margin-right: 30px;
 }
 
@@ -13,7 +13,7 @@
 }
 
 @media screen and  (min-width: 100px) and (max-width: 992px){
-  .btn-connect, .btn-register{
+  .btn-connect{
     margin-right: 0;
     margin-bottom: 8px;
   }
