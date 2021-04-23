@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+    {% for advert in adverts %}
+        <a href="{{ path('advert_show', {id: advert.id}) }}">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ advert.photo }}" class="card-img-top" alt="{{ advert.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ advert.title }}</h5>
+                    <p class="card-text">{{ advert.description }}</p>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
 {% endblock %}
