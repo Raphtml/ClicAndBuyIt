@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for advert in adverts %}
-        <a href="{{ path('advert_show', {id: advert.id}) }}">
-            <div class="card" style="width: 18rem;">
-                <img src="{{ advert.photo }}" class="card-img-top" alt="{{ advert.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ advert.title }}</h5>
-                    <p class="card-text">{{ advert.description }}</p>
+    <div class="row row-cols-1 row-cols-md-2 g-4 list-home" style="margin-left: 10px; margin-right: 10px;">
+        {% for advert in adverts %}
+            <a href="{{ path('advert_show', {id: advert.id}) }}">
+                <div class="col">
+                    <div class="card">
+                        <img src="{{ advert.photo }}" class="card-img-top" alt="..." style="height: 140px">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ advert.title }}</h5>
+                            <p class="card-text">{{ advert.description }}</p>
+                            <p class="card-text"><small class="text-muted">Ajoutée le : {{ advert.createdAt|date("d/m/Y", "Europe/Paris") }}</small></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </a>
-    {% endfor %}
+            </a>
+        {% endfor %}
+    </div>
 {% endblock %}

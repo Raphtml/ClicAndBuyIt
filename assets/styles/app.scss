@@ -1,5 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
 
+body{
+  margin: 0;
+  padding: 0;
+}
+
 .nav-logo{
   width: 50px;
 }
@@ -10,6 +15,18 @@
 
 .links{
   margin-left: auto;
+}
+
+.list-home{
+  margin-left: 10px;
+  margin-right: 10px;
+  a{
+    text-decoration: none;
+    color: unset;
+  }
+  a:hover{
+    opacity: 0.5;
+  }
 }
 
 @media screen and  (min-width: 100px) and (max-width: 992px){
