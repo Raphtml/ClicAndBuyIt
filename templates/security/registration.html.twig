@@ -41,14 +41,3 @@
                 {{ form_end(form) }}
         </div>
 {% endblock %}
-
-{% block javascripts %}
-        <script>
-                window.onload = function () {
-                        const badge = document.getElementsByClassName('badge');
-                        for (let i=0; i<badge.length; i++){
-                                badge[i].innerHTML = 'Erreur';
-                        }
-                }
-        </script>
-{% endblock %}

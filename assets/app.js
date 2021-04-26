@@ -20,3 +20,11 @@ $(document).ready(function() {
         });
     }, 5000)
 });
+
+// Traduction du badge Error
+window.onload = function () {
+    const badge = document.getElementsByClassName('badge');
+    for (let i=0; i<badge.length; i++){
+        badge[i].innerHTML = 'Erreur';
+    }
+}

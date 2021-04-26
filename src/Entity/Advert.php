@@ -6,6 +6,7 @@ use App\Repository\AdvertRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AdvertRepository::class)
@@ -21,16 +22,19 @@ class Advert
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci d'indiquer un titre à votre annonce")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Merci d'indiquer une description à votre annonce")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci d'ajouter une photo à votre annonce")
      */
     private $photo;
 
@@ -58,16 +62,19 @@ class Advert
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="adverts")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Merci d'ajouter une catégorie à votre annonce")
      */
     private $category;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci d'indiquer votre code postal")
      */
     private $zipCode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci d'indiquer votre ville")
      */
     private $city;
 

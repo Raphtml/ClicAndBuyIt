@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 links">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Catégories
@@ -22,6 +22,18 @@
                 <a href="{{ path('register') }}" class="btn btn-secondary btn-connect">S'inscrire</a>
             {% else %}
                 <p class="welcome">Bonjour {{ app.user.firstname|capitalize }}</p>
+                <ul class=" mb-2 mb-lg-0" style="padding-left: 0">
+                    <li class="nav-item dropdown" style="list-style: none">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ path('advert_new') }}">Créer une annonce</a></li>
+                            <li><a class="dropdown-item" href="#">Mes annonces</a></li>
+                            <li><a class="dropdown-item" href="#">Mes infos persos</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <a href="{{ path('logout') }}" class="btn btn-danger btn-connect">Déconnexion</a>
             {% endif %}
         </div>

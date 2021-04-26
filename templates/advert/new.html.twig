@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Advert{% endblock %}
+{% block title %}Nouvelle annonce{% endblock %}
 
 {% block body %}
-    <h1>Create new Advert</h1>
+    <div class="w-75 m-auto">
+        <h1 class="mb-lg-4 mb-md-4">Nouvelle annonce</h1>
 
-    {{ include('advert/_form.html.twig') }}
-
-    <a href="{{ path('advert_index') }}">back to list</a>
+        {{ include('advert/_form.html.twig') }}
+    </div>
 {% endblock %}

@@ -278,4 +278,9 @@ class User implements UserInterface
     {
         $this->confirmPassword = $confirmPassword;
     }
+
+    public function __toString(): string
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
+    }
 }

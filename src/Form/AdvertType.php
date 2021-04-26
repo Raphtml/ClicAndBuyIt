@@ -15,10 +15,9 @@ class AdvertType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('photo')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('user')
             ->add('category')
+            ->add('zipCode')
+            ->add('city')
         ;
     }
 

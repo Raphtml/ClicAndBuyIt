@@ -33,6 +33,10 @@ class AdvertController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        if (!$this->getUser()){
+            return $this->redirectToRoute('home');
+        }
+
         $advert = new Advert();
         $form = $this->createForm(AdvertType::class, $advert);
         $form->handleRequest($request);
