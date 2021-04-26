@@ -19,6 +19,7 @@
             </ul>
             {% if not app.user %}
                 <a href="{{ path('login') }}" class="btn btn-primary btn-connect">Se connecter</a>
+                <a href="{{ path('register') }}" class="btn btn-secondary btn-connect">S'inscrire</a>
             {% else %}
                 <p class="welcome">Bonjour {{ app.user.firstname|capitalize }}</p>
                 <a href="{{ path('logout') }}" class="btn btn-danger btn-connect">Déconnexion</a>

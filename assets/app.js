@@ -12,3 +12,11 @@ import { Tooltip, Toast, Popover} from "bootstrap";
 
 // start the Stimulus application
 import './bootstrap';
+
+// Fade sur les flashmessage
+$(document).ready(function() {
+    setTimeout(function () {
+        $( "#flash-message" ).fadeOut( "slow", function() {
+        });
+    }, 5000)
+});
