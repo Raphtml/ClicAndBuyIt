@@ -7,17 +7,25 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Faker\Factory;
 
 class CategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create('fr');
+        $categories = [
+            'Immobilier',
+            'Véhicules',
+            'Mode',
+            'Maison',
+            'Multimédia',
+            'Loisirs',
+            'Animaux',
+            'Services'
+        ];
 
-        for ($i=0;$i<10;$i++){
+        for ($i=0;$i<count($categories);$i++){
             $category = new Category();
-            $category->setName($faker->word());
+            $category->setName($categories[$i]);
             $manager->persist($category);
             $this->addReference('category_' . $i, $category);
         }

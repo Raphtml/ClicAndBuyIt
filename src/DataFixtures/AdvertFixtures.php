@@ -24,7 +24,11 @@ class AdvertFixtures extends Fixture implements DependentFixtureInterface
                 ->setCreatedAt(new \DateTime())
                 ->setPhoto($faker->imageUrl())
                 ->setUser($this->getReference('user'))
-                ->setCategory($this->getReference('category_' . rand(0, 9)));
+                ->setCategory($this->getReference('category_' . rand(0, 7)))
+                ->setZipCode($faker->postcode)
+                ->setCity($faker->city)
+                ->setLatitude($faker->latitude)
+                ->setLongitude($faker->longitude);
 
             $this->addReference('advert_' . $i, $advert);
 
