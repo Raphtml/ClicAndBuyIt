@@ -6,10 +6,16 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Cette adresse email est déjà utilisée"
+ * )
  */
 class User implements UserInterface
 {
@@ -22,6 +28,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Veuillez indiquer votre email")
+     * @Assert\Email(message="Veuillez indiquer une adresse mail valide")
      */
     private $email;
 
@@ -33,21 +41,32 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Veuillez indiquer un mot de passe")
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire au minimum 8 caractères")
      */
     private $password;
 
     /**
+     * @Assert\NotBlank(message="Veuillez confirmer votre mot de passe")
+     * @Assert\EqualTo(propertyPath="password", message="Les mots de passe ne sont pas identiques")
+     */
+    private $confirmPassword;
+
+    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez indiquer votre prénom")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez indiquer votre nom")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez indiquer votre numéro de téléphone")
      */
     private $telephone;
 
@@ -121,7 +140,7 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword($password): self
     {
         $this->password = $password;
 
@@ -242,5 +261,21 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmPassword()
+    {
+        return $this->confirmPassword;
+    }
+
+    /**
+     * @param mixed $confirmPassword
+     */
+    public function setConfirmPassword($confirmPassword): void
+    {
+        $this->confirmPassword = $confirmPassword;
     }
 }

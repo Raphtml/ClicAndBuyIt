@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <div class="w-75 m-auto">
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                <div class="row mb-lg-3 mb-md-3">
+                        <div class="col-6">
+                                {{ form_widget(form.firstname, {'label': false, 'attr': {'placeholder':'Prénom', 'class': 'form-control'}}) }}
+                                {{ form_errors(form.firstname) }}
+                        </div>
+                        <div class="col-6">
+                                {{ form_widget(form.lastname, {'label': false, 'attr': {'placeholder':'Nom', 'class': 'form-control'}}) }}
+                                {{ form_errors(form.lastname) }}
+                        </div>
+                </div>
+                <div class="row mb-lg-3 mb-md-3">
+                        <div class="col-6">
+                                {{ form_widget(form.telephone, {'label': false, 'attr': {'placeholder':'Téléphone', 'class': 'form-control'}}) }}
+                                {{ form_errors(form.telephone) }}
+                        </div>
+                        <div class="col-6">
+                                {{ form_widget(form.email, {'label': false, 'attr': {'placeholder':'Email', 'class': 'form-control'}}) }}
+                                {{ form_errors(form.email) }}
+                        </div>
+                </div>
+                <div class="row mb-lg-3 mb-md-3">
+                        <div class="col-12">
+                                {{ form_widget(form.password, {'label': false, 'attr': {'placeholder':'Mot de passe', 'class': 'form-control'}}) }}
+                                {{ form_errors(form.password) }}
+                        </div>
+                </div>
+
+                <div class="row mb-lg-3 mb-md-3">
+                        <div class="col-12">
+                                {{ form_widget(form.confirmPassword, {'label': false, 'attr': {'placeholder':'Confirmation mot de passe', 'class': 'form-control'}}) }}
+                                {{ form_errors(form.confirmPassword) }}
+                        </div>
+                </div>
+
+                <button type="submit" class="btn btn-success m-auto">S'inscrire</button>
+                {{ form_end(form) }}
+        </div>
+{% endblock %}
+
+{% block javascripts %}
+        <script>
+                window.onload = function () {
+                        const badge = document.getElementsByClassName('badge');
+                        for (let i=0; i<badge.length; i++){
+                                badge[i].innerHTML = 'Erreur';
+                        }
+                }
+        </script>
+{% endblock %}
