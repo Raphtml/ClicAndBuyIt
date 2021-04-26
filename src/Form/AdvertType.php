@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Advert;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,7 @@ class AdvertType extends AbstractType
             ->add('photo')
             ->add('category')
             ->add('zipCode')
-            ->add('city')
+            ->add('city', ChoiceType::class)
         ;
     }
 

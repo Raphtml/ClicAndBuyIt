@@ -28,3 +28,25 @@ window.onload = function () {
         badge[i].innerHTML = 'Erreur';
     }
 }
+
+// Récupération des villes via le code postal
+$(function () {
+    var zipCode = $('#advert_zipCode');
+    var callBackGetSuccess = function (data){
+        for (let i=0; i<data.records.length; i++){
+            document.getElementById('advert_city').options[i] = new Option(data.records[i]['fields']['nom_de_la_commune'],data.records[i]['fields']['nom_de_la_commune']);
+        }
+    }
+    zipCode.change(function () {
+        if (zipCode.val().length === 5){
+            var url = "https://datanova.legroupe.laposte.fr/api/records/1.0/search/?dataset=laposte_hexasmal&q=&refine.code_postal="+zipCode.val()+"&exclude.code_commune_insee="+zipCode.val();
+            $.get(url, callBackGetSuccess).done(function () {
+            })
+                .fail(function () {
+                    console.log('Erreur lors de la récupération des villes');
+                })
+                .always(function () {
+                });
+        }
+    });
+});

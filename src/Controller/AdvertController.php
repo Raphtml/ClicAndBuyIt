@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Advert;
+use App\Entity\Category;
 use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,11 +24,14 @@ class AdvertController extends AbstractController
      */
     public function index(AdvertRepository $advertRepository): Response
     {
+        if (!$this->getUser()){
+            return $this->redirectToRoute('home');
+        }
+
         return $this->render('advert/index.html.twig', [
-            'adverts' => $advertRepository->findAll(),
+            'adverts' => $advertRepository->findBy(['user' => $this->getUser()]),
         ]);
     }
-
 
     /**
      * @Route("/new", name="new", methods={"GET", "POST"})
@@ -45,6 +50,7 @@ class AdvertController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($advert);
             $entityManager->flush();
+            $this->addFlash('success', 'Votre annonce a bien été ajoutée');
 
             return $this->redirectToRoute('advert_index');
         }
@@ -100,5 +106,19 @@ class AdvertController extends AbstractController
         }
 
         return $this->redirectToRoute('advert_index');
+    }
+
+    /**
+     * @Route("/{categoryName}/show", name="category")
+     * @param AdvertRepository $advertRepository
+     * @param Category $category
+     * @return Response
+     * @ParamConverter("category", options={"mapping": {"categoryName" : "name"}})
+     */
+    public function showByCategory(AdvertRepository $advertRepository, Category $category): Response
+    {
+        return $this->render('advert/index.html.twig', [
+            'adverts' => $advertRepository->findBy(['category' => $category]),
+        ]);
     }
 }
