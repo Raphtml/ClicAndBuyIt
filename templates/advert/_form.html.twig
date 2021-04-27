@@ -4,15 +4,15 @@
         {{ form_widget(form.title) }}
     </div>
 
-    <div class="mb-lg-3 mb-md-3">
+    <div class="mb-lg-2 mb-md-2">
         {{ form_label(form.description, 'Decription de l\'annonce') }}
         {{ form_widget(form.description, {'attr': {'rows': 6}}) }}
     </div>
 
 
-    <div class="mb-lg-3 mb-md-3">
-        {{ form_label(form.photo, 'Photo de l\'annonce') }}
-        {{ form_widget(form.photo) }}
+    <div>
+        {{ form_label(form.photoFile, 'Photo de l\'annonce') }}
+        {{ form_widget(form.photoFile, {'attr': {'style': 'cursor: pointer', 'class':'form-control'}}) }}
     </div>
 
 

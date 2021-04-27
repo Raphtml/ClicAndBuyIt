@@ -6,7 +6,7 @@
             <a href="{{ path('advert_show', {id: advert.id}) }}">
                 <div class="col">
                     <div class="card">
-                        <img src="{{ advert.photo }}" class="card-img-top" alt="..." style="height: 140px">
+                        <img src="{{ vich_uploader_asset(advert, 'photoFile') }}" class="card-img-top" alt="..." style="height: 140px">
                         <div class="card-body">
                             <h5 class="card-title">{{ advert.title }}</h5>
                             <p class="card-text">{{ advert.description }}</p>

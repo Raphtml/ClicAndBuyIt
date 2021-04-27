@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AdvertType extends AbstractType
 {
@@ -16,7 +17,10 @@ class AdvertType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('photo')
+            ->add('photoFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+            ])
             ->add('category')
             ->add('zipCode')
             ->add('city')

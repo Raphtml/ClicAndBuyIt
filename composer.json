@@ -6,7 +6,9 @@
     "require": {
         "php": ">=7.2.5",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.3",
@@ -43,8 +45,7 @@
         "symfony/yaml": "5.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-      "ext-curl": "*",
-        "ext-json": "*"
+        "vich/uploader-bundle": "^1.17"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",

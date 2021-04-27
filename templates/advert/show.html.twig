@@ -21,7 +21,8 @@
             </tr>
             <tr>
                 <th>Photo</th>
-                <td>{{ advert.photo }}</td>
+
+                <td><img src="{{ vich_uploader_asset(advert, 'photoFile') }}"></td>
             </tr>
             <tr>
                 <th>CreatedAt</th>
