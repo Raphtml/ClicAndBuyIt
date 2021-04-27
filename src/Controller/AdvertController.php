@@ -6,11 +6,13 @@ use App\Entity\Advert;
 use App\Entity\Category;
 use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
+use App\Services\connectGoogleApiService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * Class AdvertController
@@ -36,7 +38,7 @@ class AdvertController extends AbstractController
     /**
      * @Route("/new", name="new", methods={"GET", "POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, connectGoogleApiService $googleApi): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('home');
@@ -47,6 +49,11 @@ class AdvertController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $geoloc = $googleApi->getCityLatLong($advert->getCity());
+            $advert->setUser($this->getUser())
+                ->setCreatedAt(New \DateTime('now', new \DateTimeZone('Europe/Paris')))
+                ->setLatitude($geoloc['lat'])
+                ->setLongitude($geoloc['lng']);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($advert);
             $entityManager->flush();
@@ -56,7 +63,6 @@ class AdvertController extends AbstractController
         }
 
         return $this->render('advert/new.html.twig', [
-            'advert' => $advert,
             'form' => $form->createView(),
         ]);
     }

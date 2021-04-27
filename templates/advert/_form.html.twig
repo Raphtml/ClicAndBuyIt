@@ -2,12 +2,11 @@
     <div class="mb-lg-3 mb-md-3">
         {{ form_label(form.title, 'Titre de l\'annonce') }}
         {{ form_widget(form.title) }}
-
     </div>
 
     <div class="mb-lg-3 mb-md-3">
         {{ form_label(form.description, 'Decription de l\'annonce') }}
-        {{ form_widget(form.description, {'attr': {'rows': 10}}) }}
+        {{ form_widget(form.description, {'attr': {'rows': 6}}) }}
     </div>
 
 
@@ -30,9 +29,9 @@
 
         <div class="col-6 mb-lg-3 mb-md-3">
             {{ form_label(form.city, 'Ville') }}
-            {{ form_widget(form.city, {'attr': {'style': 'cursor: pointer'}}) }}
+            {{ form_widget(form.city) }}
         </div>
     </div>
 
-    <button class="btn btn-primary mb-lg-4 mb-md-4" type="submit">Créer mon annonce</button>
+    <button class="btn btn-primary mb-lg-4 mb-md-4" type="submit" id="advert_submit">Créer mon annonce</button>
 {{ form_end(form) }}
