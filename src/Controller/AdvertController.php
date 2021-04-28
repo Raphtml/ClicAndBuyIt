@@ -7,7 +7,7 @@ use App\Entity\Category;
 use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use App\Services\connectGoogleApiService;
-use Cocur\Slugify\Slugify;
+use Cocur\Slugify\SlugifyInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +38,7 @@ class AdvertController extends AbstractController
     /**
      * @Route("/new", name="new", methods={"GET", "POST"})
      */
-    public function new(Request $request, connectGoogleApiService $googleApi, Slugify $slugify): Response
+    public function new(Request $request, connectGoogleApiService $googleApi, SlugifyInterface $slugify): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('home');

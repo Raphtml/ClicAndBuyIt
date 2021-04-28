@@ -19,7 +19,7 @@ class AdvertType extends AbstractType
             ->add('description')
             ->add('photoFile', VichImageType::class, [
                 'required' => false,
-                'allow_delete' => true,
+                'allow_delete' => false,
             ])
             ->add('category')
             ->add('zipCode')
