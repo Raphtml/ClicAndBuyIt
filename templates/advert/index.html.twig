@@ -23,7 +23,7 @@
                 <td>{{ advert.id }}</td>
                 <td>{{ advert.title }}</td>
                 <td>{{ advert.description }}</td>
-                <td><img src="{{ vich_uploader_asset(advert, 'photoFile') }}"></td>
+                <td><img src="{{ vich_uploader_asset(advert, 'photoFile')|imagine_filter('miniature') }}"></td>
                 <td>{{ advert.createdAt ? advert.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ advert.updatedAt ? advert.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>

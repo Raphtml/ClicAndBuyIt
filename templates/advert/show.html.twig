@@ -22,7 +22,7 @@
             <tr>
                 <th>Photo</th>
 
-                <td><img src="{{ vich_uploader_asset(advert, 'photoFile') }}"></td>
+                <td><img src="{{ vich_uploader_asset(advert, 'photoFile')|imagine_filter('miniature') }}"></td>
             </tr>
             <tr>
                 <th>CreatedAt</th>

@@ -24,3 +24,6 @@ yarn-error.log
 
 /public/uploads/adverts/*
 !/public/uploads/adverts/placeholder.jpeg
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
