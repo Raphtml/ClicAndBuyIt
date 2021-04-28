@@ -12,7 +12,12 @@
 
 ###Lancer l'environnement de développement
 
+Lancer les commandes suivantes dans cet ordre :
+
 ````bash
+composer install
+yarn install
+yarn encore dev
 docker compose up -d
 symfony serve -d
 symfony console doctrine:database:create

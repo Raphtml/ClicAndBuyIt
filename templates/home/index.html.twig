@@ -3,18 +3,18 @@
 {% block body %}
     <div class="row row-cols-1 row-cols-md-2 g-4 list-home" style="margin-left: 10px; margin-right: 10px;">
         {% for advert in adverts %}
-            <a href="{{ path('advert_show', {id: advert.id}) }}">
                 <div class="col">
-                    <div class="card">
-                        <img src="{{ vich_uploader_asset(advert, 'photoFile') }}" class="card-img-top" alt="..." style="height: 140px">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ advert.title }}</h5>
-                            <p class="card-text">{{ advert.description }}</p>
-                            <p class="card-text"><small class="text-muted">Ajoutée le : {{ advert.createdAt|date("d/m/Y", "Europe/Paris") }}</small></p>
-                        </div>
+                    <div class="card h-100">
+                        <img src="{{ vich_uploader_asset(advert, 'photoFile') }}" class="card-img-top" alt="{{ advert.title }}" style="height: 140px">
+                        <a href="{{ path('advert_show', {id: advert.id}) }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ advert.title }}</h5>
+                                <p class="card-text">{{ advert.description }}</p>
+                                <p class="card-text"><small class="text-muted">Ajoutée le : {{ advert.createdAt|date("d/m/Y", "Europe/Paris") }}</small></p>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </a>
         {% endfor %}
     </div>
 {% endblock %}

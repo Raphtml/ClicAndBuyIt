@@ -22,13 +22,13 @@ class AdvertFixtures extends Fixture implements DependentFixtureInterface
             $advert->setTitle($faker->sentence())
                 ->setDescription($faker->text())
                 ->setCreatedAt(new \DateTime())
-                ->setPhoto($faker->imageUrl())
                 ->setUser($this->getReference('user'))
                 ->setCategory($this->getReference('category_' . rand(0, 7)))
                 ->setZipCode($faker->postcode)
                 ->setCity($faker->city)
                 ->setLatitude($faker->latitude)
-                ->setLongitude($faker->longitude);
+                ->setLongitude($faker->longitude)
+                ->setPhotoName('placeholder.jpeg');
 
             $this->addReference('advert_' . $i, $advert);
 
