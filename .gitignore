@@ -21,4 +21,6 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
-/public/uploads/adverts
+
+/public/uploads/adverts/*
+!/public/uploads/adverts/placeholder.jpeg
