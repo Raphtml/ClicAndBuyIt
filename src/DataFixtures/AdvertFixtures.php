@@ -24,6 +24,7 @@ class AdvertFixtures extends Fixture implements DependentFixtureInterface
                 ->setCreatedAt(new \DateTime())
                 ->setUser($this->getReference('user'))
                 ->setCategory($this->getReference('category_' . rand(0, 7)))
+                ->setPrice(rand(10, 5000))
                 ->setZipCode($faker->postcode)
                 ->setCity($faker->city)
                 ->setLatitude($faker->latitude)

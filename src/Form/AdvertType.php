@@ -24,6 +24,7 @@ class AdvertType extends AbstractType
             ->add('category')
             ->add('zipCode')
             ->add('city')
+            ->add('price')
         ;
     }
 

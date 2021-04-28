@@ -5,6 +5,7 @@
         "autoprefixer": "^10.2.5",
         "core-js": "^3.0.0",
         "file-loader": "^6.0.0",
+        "font-awesome": "^4.7.0",
         "postcss-loader": "^5.2.0",
         "regenerator-runtime": "^0.13.2",
         "sass": "^1.32.11",
@@ -21,6 +22,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@googlemaps/js-api-loader": "^1.11.3",
         "@popperjs/core": "^2.9.2",
         "bootstrap": "^5.0.0-beta3"
     }

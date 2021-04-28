@@ -102,6 +102,12 @@ class Advert
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Merci d'indiquer votre ville")
+     */
+    private $price;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -284,7 +290,8 @@ class Advert
      * must be able to accept an instance of 'File' as the bundle will inject one here
      * during Doctrine hydration.
      *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     * @param File|null $photoFile
+     * @throws \Exception
      */
     public function setPhotoFile(?File $photoFile = null): void
     {
@@ -305,6 +312,18 @@ class Advert
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

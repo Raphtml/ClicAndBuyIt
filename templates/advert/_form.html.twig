@@ -9,16 +9,20 @@
         {{ form_widget(form.description, {'attr': {'rows': 6}}) }}
     </div>
 
+    <div class="row">
+        <div class="col-6 mb-lg-3 mb-md-3">
+            {{ form_label(form.price, 'Prix') }}
+            {{ form_widget(form.price) }}
+        </div>
+        <div class="col-6 mb-lg-3 mb-md-3">
+            {{ form_label(form.category, 'Catégorie de l\'annonce') }}
+            {{ form_widget(form.category, {'attr': {'style': 'cursor: pointer'}}) }}
+        </div>
+    </div>
 
     <div>
         {{ form_label(form.photoFile, 'Photo de l\'annonce') }}
         {{ form_widget(form.photoFile, {'attr': {'style': 'cursor: pointer', 'class':'form-control'}}) }}
-    </div>
-
-
-    <div class="mb-lg-3 mb-md-3">
-        {{ form_label(form.category, 'Catégorie de l\'annonce') }}
-        {{ form_widget(form.category, {'attr': {'style': 'cursor: pointer'}}) }}
     </div>
 
     <div class="row mb-lg-3 mb-md-3">
@@ -26,7 +30,6 @@
             {{ form_label(form.zipCode, 'Code postal') }}
             {{ form_widget(form.zipCode) }}
         </div>
-
         <div class="col-6 mb-lg-3 mb-md-3">
             {{ form_label(form.city, 'Ville') }}
             {{ form_widget(form.city) }}
