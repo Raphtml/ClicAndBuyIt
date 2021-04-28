@@ -27,8 +27,8 @@
                 <td>{{ advert.createdAt ? advert.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ advert.updatedAt ? advert.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('advert_show', {'id': advert.id}) }}">show</a>
-                    <a href="{{ path('advert_edit', {'id': advert.id}) }}">edit</a>
+                    <a href="{{ path('advert_show', {'slug': advert.slug}) }}">show</a>
+                    <a href="{{ path('advert_edit', {'slug': advert.slug}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

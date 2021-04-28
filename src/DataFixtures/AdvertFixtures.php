@@ -28,6 +28,7 @@ class AdvertFixtures extends Fixture implements DependentFixtureInterface
                 ->setCity($faker->city)
                 ->setLatitude($faker->latitude)
                 ->setLongitude($faker->longitude)
+                ->setSlug($faker->slug())
                 ->setPhotoName('placeholder.jpeg');
 
             $this->addReference('advert_' . $i, $advert);

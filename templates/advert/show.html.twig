@@ -37,7 +37,7 @@
 
     <a href="{{ path('advert_index') }}">back to list</a>
 
-    <a href="{{ path('advert_edit', {'id': advert.id}) }}">edit</a>
+    <a href="{{ path('advert_edit', {'slug': advert.slug}) }}">edit</a>
 
     {{ include('advert/_delete_form.html.twig') }}
 {% endblock %}

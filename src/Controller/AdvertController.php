@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use App\Services\connectGoogleApiService;
+use Cocur\Slugify\Slugify;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +38,7 @@ class AdvertController extends AbstractController
     /**
      * @Route("/new", name="new", methods={"GET", "POST"})
      */
-    public function new(Request $request, connectGoogleApiService $googleApi): Response
+    public function new(Request $request, connectGoogleApiService $googleApi, Slugify $slugify): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('home');
@@ -52,7 +53,8 @@ class AdvertController extends AbstractController
             $advert->setUser($this->getUser())
                 ->setCreatedAt(New \DateTime('now', new \DateTimeZone('Europe/Paris')))
                 ->setLatitude($geoloc['lat'])
-                ->setLongitude($geoloc['lng']);
+                ->setLongitude($geoloc['lng'])
+                ->setSlug($slugify->slugify($advert->getTitle()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($advert);
             $entityManager->flush();
@@ -69,7 +71,7 @@ class AdvertController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="show", methods={"GET"})
+     * @Route("/{slug}", name="show", methods={"GET"})
      */
     public function show(Advert $advert): Response
     {
@@ -80,7 +82,8 @@ class AdvertController extends AbstractController
 
 
     /**
-     * @Route("/{id}/edit", name="edit", methods={"GET", "POST"})
+     * @Route("/{slug}/edit", name="edit", methods={"GET", "POST"})
+     * @throws \Exception
      */
     public function edit(Request $request, Advert $advert): Response
     {
@@ -88,6 +91,7 @@ class AdvertController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $advert->setUpdatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('advert_index');
@@ -101,7 +105,7 @@ class AdvertController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="delete", methods={"POST"})
+     * @Route("/{slug}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Advert $advert): Response
     {

@@ -97,6 +97,11 @@ class Advert
      */
     private $longitude;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -290,5 +295,17 @@ class Advert
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         }
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
