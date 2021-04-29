@@ -69,7 +69,6 @@ class AdvertController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/{slug}", name="show", methods={"GET"})
      */
@@ -105,7 +104,7 @@ class AdvertController extends AbstractController
 
 
     /**
-     * @Route("/{slug}", name="delete", methods={"POST"})
+     * @Route("/{id}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Advert $advert): Response
     {
@@ -113,6 +112,7 @@ class AdvertController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($advert);
             $entityManager->flush();
+            $this->addFlash('success', 'Votre annonce a été supprimée');
         }
 
         return $this->redirectToRoute('advert_index');

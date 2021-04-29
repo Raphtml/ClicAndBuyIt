@@ -20,36 +20,43 @@ $(document).ready(function() {
     setTimeout(function () {
         $( "#flash-message" ).fadeOut( "slow", function() {
         });
-    }, 5000)
+    }, 5000);
 });
 
-window.onload = function () {
 
-    // Traduction du badge Error
-    const badge = document.getElementsByClassName('badge');
-    for (let i=0; i<badge.length; i++){
-        badge[i].innerHTML = 'Erreur';
-    }
-
-    //Récupération Latitude et Longitude pour map
-
-    const latitude = document.getElementById('mapLat').value;
-    const longitude = document.getElementById('mapLong').value;
-
-    //Map Google API
-
-    const loader = new Loader({
-        apiKey: "AIzaSyChDtqFD104DaO6jVhw7337uW4m6V6FJrY",
-        version: "weekly",
-    });
-    loader.load().then(() => {
-        let map = new google.maps.Map(document.getElementById("map"), {
-            center: {lat: parseFloat(latitude), lng: parseFloat(longitude)},
-            zoom: 12,
-        });
-        new google.maps.Marker({
-            position: {lat: parseFloat(latitude), lng: parseFloat(longitude)},
-            map: map,
-        })
-    });
+// Traduction du badge Error
+const badge = document.getElementsByClassName('badge');
+for (let i=0; i<badge.length; i++){
+    badge[i].innerHTML = 'Erreur';
 }
+
+//Récupération Latitude et Longitude pour map
+
+const latitude = document.getElementById('mapLat').value;
+const longitude = document.getElementById('mapLong').value;
+
+//Map Google API
+
+const loader = new Loader({
+    apiKey: "AIzaSyChDtqFD104DaO6jVhw7337uW4m6V6FJrY",
+    version: "weekly",
+});
+loader.load().then(() => {
+    let map = new google.maps.Map(document.getElementById("map"), {
+        center: {lat: parseFloat(latitude), lng: parseFloat(longitude)},
+        zoom: 12,
+    });
+    new google.maps.Marker({
+        position: {lat: parseFloat(latitude), lng: parseFloat(longitude)},
+        map: map,
+    })
+});
+
+
+
+document.getElementById('buyBtn').addEventListener('click', function () {
+    this.classList.add('d-none');
+    document.getElementById('telephone').classList.remove('d-none');
+
+
+});

@@ -6,31 +6,40 @@
     <input type="hidden" value="{{ advert.latitude }}" id="mapLat">
     <input type="hidden" value="{{ advert.longitude }}" id="mapLong">
     
-    <div class="w-75 m-auto d-flex flex-column justify-content-center">
+    <div class="w-75 m-auto d-flex flex-column justify-content-center mb-5">
         <img class="w-50 align-self-center" src="{{ vich_uploader_asset(advert, 'photoFile')|imagine_filter('miniature') }}" alt="{{ advert.title }}">
         <h1 class="mt-lg-5 mt-md-5">{{ advert.title }}</h1>
         <h3>{{ advert.price }}€</h3>
-        <p>{{ advert.createdAt|format_datetime(locale='fr') }}</p>
+        <p>Annonce créée par {{ advert.user.firstname|capitalize }} le {{ advert.createdAt|format_datetime(locale='fr') }}</p>
+
+        {% if app.user is not defined or app.user != advert.user %}
+            <button class="btn btn-primary align-self-center w-50" id="buyBtn">Voir le numéro</button>
+            <button type="button" class="btn btn-outline-secondary align-self-center w-50 d-none" id="telephone">{{ advert.user.telephone }}</button>
+        {% else %}
+            <div class="mt-3 d-flex flex-column w-50 m-auto">
+                <a class="btn btn-success mb-3" href="{{ path('advert_edit', {'slug': advert.slug}) }}">Modifier mon annonce</a>
+                {% include 'advert/_delete_form.html.twig' %}
+            </div>
+        {% endif %}
+
         <hr>
         <div class="mt-3">
             <h3 class="mb-3">Description</h3>
             <p>{{ advert.description }}</p>
+            <h3 class="mb-3">Catégorie</h3>
+            <p>{{ advert.category }}</p>
         </div>
         <hr>
         <div class="mt-3 d-flex">
                 <i class="fa fa-map-marker fa-2x" aria-hidden="true" style="padding-right: 5px"></i>
                 <h4 class="mb-0 align-self-center">{{ advert.city}}</h4>
         </div>
-        <div id="map" style="height: 300px">
-
+        <div class="mt-3" id="map" style="height: 300px">
         </div>
+        {% if app.user == advert.user %}
+            <a href="{{ path('advert_index') }}" class="btn btn-secondary w-50 mt-5 m-auto">Revenir à ma liste d'annonces</a>
+        {% else %}
+            <a href="{{ path('advert_category', {categoryName: advert.category.name}) }}" class="btn btn-secondary w-50 mt-5 m-auto">Voir toutes les annonces de cette catégorie</a>
+        {% endif %}
     </div>
-
-
-
-    <a href="{{ path('advert_index') }}">back to list</a>
-
-    <a href="{{ path('advert_edit', {'slug': advert.slug}) }}">edit</a>
-
-    {{ include('advert/_delete_form.html.twig') }}
 {% endblock %}

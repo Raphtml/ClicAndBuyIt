@@ -24,11 +24,13 @@ class AdvertLike
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="likes")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Advert::class, inversedBy="likes")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $advert;
 

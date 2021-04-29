@@ -41,6 +41,14 @@ body{
   margin: 0 10px 0 0;
 }
 
+#telephone{
+  color: #6c757d;
+}
+
+#telephone:hover{
+  color: white;
+}
+
 @media screen and  (min-width: 100px) and (max-width: 992px){
   .btn-connect{
     margin-right: 0;
