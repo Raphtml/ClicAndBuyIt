@@ -20,6 +20,8 @@ class AdvertType extends AbstractType
             ->add('photoFile', VichImageType::class, [
                 'required' => false,
                 'allow_delete' => false,
+                'imagine_pattern' => 'miniature',
+                'download_label' => 'Télécharger l\'image',
             ])
             ->add('category')
             ->add('zipCode')

@@ -57,6 +57,4 @@ loader.load().then(() => {
 document.getElementById('buyBtn').addEventListener('click', function () {
     this.classList.add('d-none');
     document.getElementById('telephone').classList.remove('d-none');
-
-
 });

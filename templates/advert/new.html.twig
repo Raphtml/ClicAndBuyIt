@@ -5,7 +5,9 @@
 {% block body %}
     <div class="w-75 m-auto">
         <h1 class="mb-lg-4 mb-md-4">Nouvelle annonce</h1>
-
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
         {{ include('advert/_form.html.twig') }}
+        {% include 'advert/_btn_create.html.twig' %}
+        {{ form_end(form) }}
     </div>
 {% endblock %}

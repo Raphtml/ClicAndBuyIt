@@ -49,6 +49,15 @@ body{
   color: white;
 }
 
+.vich-image{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  a{
+    max-width: 197px;
+  }
+}
+
 @media screen and  (min-width: 100px) and (max-width: 992px){
   .btn-connect{
     margin-right: 0;
