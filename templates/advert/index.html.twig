@@ -1,43 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Advert index{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block body %}
-    <h1>Advert index</h1>
+    <h1 class="text-center mt-3 mb-lg-3 mb-md-3">{{ title | capitalize}}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Photo</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for advert in adverts %}
-            <tr>
-                <td>{{ advert.id }}</td>
-                <td>{{ advert.title }}</td>
-                <td>{{ advert.description }}</td>
-                <td><img src="{{ vich_uploader_asset(advert, 'photoFile')|imagine_filter('miniature') }}"></td>
-                <td>{{ advert.createdAt ? advert.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ advert.updatedAt ? advert.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('advert_show', {'slug': advert.slug}) }}">show</a>
-                    <a href="{{ path('advert_edit', {'slug': advert.slug}) }}">edit</a>
-                </td>
-            </tr>
+    <div class="row row-cols-1 row-cols-md-2 g-4 list-home mb-md-4 mb-lg-4" style="margin-left: 10px; margin-right: 10px;">
+        {% if adverts is empty %}
+            <p class="text-center m-auto mt-5">Aucune annonce</p>
         {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('advert_new') }}">Create new</a>
+            {% for advert in adverts %}
+                <div class="col">
+                    <div class="card h-100 w-75 m-auto">
+                        <img src="{{ vich_uploader_asset(advert, 'photoFile')|imagine_filter('miniature')}}" class="card-img-top" alt="{{ advert.title }}">
+                        <a href="{{ path('advert_show', {slug: advert.slug}) }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ advert.title }}</h5>
+                                <p class="card-text">{{ advert.description }}</p>
+                                <p class="card-text"><small class="text-muted">Ajoutée le : {{ advert.createdAt|date("d/m/Y", "Europe/Paris") }}</small></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}

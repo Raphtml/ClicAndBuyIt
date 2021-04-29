@@ -24,3 +24,7 @@ symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
 symfony console doctrine:fixtures:load
 ````
+
+Un user est déjà créé avec les fixtures <br>
+email : postmaster@clicandbuyit.fr <br>
+mot de passe: password

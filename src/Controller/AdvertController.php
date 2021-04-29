@@ -35,6 +35,7 @@ class AdvertController extends AbstractController
 
         return $this->render('advert/index.html.twig', [
             'adverts' => $advertRepository->findBy(['user' => $this->getUser()]),
+            'title' => 'Mes annonces'
         ]);
     }
 
@@ -80,12 +81,15 @@ class AdvertController extends AbstractController
     public function advertLiked(AdvertLikeRepository $likeRepo):Response
     {
         $adverts = [];
+        $title = "";
         $likeAdverts = $likeRepo->findBy(['user' => $this->getUser()]);
         foreach ($likeAdverts as $like){
             $adverts[] = $like->getAdvert();
         }
+        count($adverts)>1 ? $title = "Annonces sauvegardées" : $title = "Annonce sauvegardée";
         return $this->render('advert/index.html.twig', [
-            'adverts' => $adverts
+            'adverts' => $adverts,
+            'title' => $title
         ]);
     }
 
@@ -156,6 +160,7 @@ class AdvertController extends AbstractController
     {
         return $this->render('advert/index.html.twig', [
             'adverts' => $advertRepository->findBy(['category' => $category]),
+            'title' => $category->getName()
         ]);
     }
 
@@ -171,7 +176,7 @@ class AdvertController extends AbstractController
         $user = $this->getUser();
 
         if (!$user){
-            return $this->json(["message" => "Vous devez être connecter pour sauvegarder une annonce"], 403);
+            return $this->json(["message" => "Vous devez être connecté pour sauvegarder une annonce"], 403);
         }
 
         if ($advert->isLikedByUser($this->getUser())){
