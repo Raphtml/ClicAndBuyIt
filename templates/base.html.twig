@@ -15,8 +15,7 @@
     {% include '_flash_message.html.twig' %}
     {% block body %}{% endblock %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}{% endblock %}
     </body>
 </html>
