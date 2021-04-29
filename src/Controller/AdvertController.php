@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Advert;
+use App\Entity\AdvertLike;
 use App\Entity\Category;
 use App\Form\AdvertType;
+use App\Repository\AdvertLikeRepository;
 use App\Repository\AdvertRepository;
 use App\Services\connectGoogleApiService;
 use Cocur\Slugify\SlugifyInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -70,11 +73,35 @@ class AdvertController extends AbstractController
     }
 
     /**
+     * @Route("/saved", name="saved")
+     * @param AdvertLikeRepository $likeRepo
+     * @return Response
+     */
+    public function advertLiked(AdvertLikeRepository $likeRepo):Response
+    {
+        $adverts = [];
+        $likeAdverts = $likeRepo->findBy(['user' => $this->getUser()]);
+        foreach ($likeAdverts as $like){
+            $adverts[] = $like->getAdvert();
+        }
+        return $this->render('advert/index.html.twig', [
+            'adverts' => $adverts
+        ]);
+    }
+
+    /**
      * @Route("/{slug}", name="show", methods={"GET"})
      */
     public function show(Advert $advert): Response
     {
+        $bool = 0;
+        foreach ($advert->getLikes() as $like){
+            if ($like->getUser() == $this->getUser()){
+                $bool += 1;
+            }
+        }
         return $this->render('advert/show.html.twig', [
+            'bool' => $bool,
             'advert' => $advert,
         ]);
     }
@@ -130,5 +157,41 @@ class AdvertController extends AbstractController
         return $this->render('advert/index.html.twig', [
             'adverts' => $advertRepository->findBy(['category' => $category]),
         ]);
+    }
+
+    /**
+     * @Route("/like/{id}", name="like", methods={"POST"})
+     * @param Advert $advert
+     * @param EntityManagerInterface $manager
+     * @param AdvertLikeRepository $likeRepo
+     * @return Response
+     */
+    public function like(Advert $advert, EntityManagerInterface $manager, AdvertLikeRepository $likeRepo): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user){
+            return $this->json(["message" => "Vous devez être connecter pour sauvegarder une annonce"], 403);
+        }
+
+        if ($advert->isLikedByUser($this->getUser())){
+            $like = $likeRepo->findOneBy([
+                'advert' => $advert,
+                'user' => $this->getUser()
+            ]);
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json(['message' => 'Le like a été supprimé'],200);
+        }
+
+        $like = new AdvertLike();
+        $like->setUser($this->getUser())
+            ->setAdvert($advert)
+            ->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
+        $manager->persist($like);
+        $manager->flush();
+
+        return $this->json(['message' => 'Le like a été ajouté'], 200);
     }
 }

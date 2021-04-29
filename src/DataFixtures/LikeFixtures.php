@@ -13,11 +13,11 @@ class LikeFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        for ($i=0;$i<100;$i++){
+        for ($i=0;$i<20;$i++){
             $like = new AdvertLike();
             $like->setCreatedAt(new \DateTime())
                 ->setUser($this->getReference('user'))
-                ->setAdvert($this->getReference('advert_' . rand(0, 19)));
+                ->setAdvert($this->getReference('advert_' . $i));
 
             $manager->persist($like);
         }
@@ -25,7 +25,7 @@ class LikeFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             UserFixtures::class,

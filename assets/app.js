@@ -15,6 +15,8 @@ import './bootstrap';
 
 import { Loader } from "@googlemaps/js-api-loader";
 
+const axios = require('axios').default;
+
 // Fade sur les flashmessage
 $(document).ready(function() {
     setTimeout(function () {
@@ -31,12 +33,10 @@ for (let i=0; i<badge.length; i++){
 }
 
 //Récupération Latitude et Longitude pour map
-
 const latitude = document.getElementById('mapLat').value;
 const longitude = document.getElementById('mapLong').value;
 
 //Map Google API
-
 const loader = new Loader({
     apiKey: "AIzaSyChDtqFD104DaO6jVhw7337uW4m6V6FJrY",
     version: "weekly",
@@ -52,9 +52,31 @@ loader.load().then(() => {
     })
 });
 
-
-
+//Apparition num tel sur annonce
 document.getElementById('buyBtn').addEventListener('click', function () {
     this.classList.add('d-none');
     document.getElementById('telephone').classList.remove('d-none');
 });
+
+
+//Gestion sauvegarde annonce
+function onClickBtnLike(event){
+    event.preventDefault();
+
+    const url = this.href;
+    axios.post(url).then(function (response) {
+        const icone = document.querySelector('i');
+        console.log(icone);
+        if(icone.classList.contains('fa-heart-o')){
+            icone.classList.replace('fa-heart-o', 'fa-heart')
+        } else {
+            icone.classList.replace('fa-heart', 'fa-heart-o')
+        }
+    }).catch(function (error) {
+       if (error.response.status === 403){
+           window.alert('Merci de vous connecter pour sauvegarder une annonce');
+       }
+    });
+}
+document.getElementById('js-like').addEventListener('click', onClickBtnLike);
+
