@@ -28,4 +28,6 @@ symfony serve -d
 
 Un user est déjà créé avec les fixtures <br>
 email : postmaster@clicandbuyit.fr <br>
-mot de passe: password
+mot de passe: password <br> <br>
+####Si les images ne s'affichent pas, pensez à désactiver AdBlock pour le site !
+<br><br>
