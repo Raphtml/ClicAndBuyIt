@@ -80,6 +80,10 @@ class AdvertController extends AbstractController
      */
     public function advertLiked(AdvertLikeRepository $likeRepo):Response
     {
+        if (!$this->getUser()){
+            return $this->redirectToRoute('home');
+        }
+
         $adverts = [];
         $title = "";
         $likeAdverts = $likeRepo->findBy(['user' => $this->getUser()]);
@@ -117,6 +121,10 @@ class AdvertController extends AbstractController
      */
     public function edit(Request $request, Advert $advert): Response
     {
+        if ($this->getUser() != $advert->getUser()){
+            return $this->redirectToRoute('home');
+        }
+
         $form = $this->createForm(AdvertType::class, $advert);
         $form->handleRequest($request);
 
