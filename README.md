@@ -22,7 +22,7 @@ yarn encore dev
 docker compose up -d
 symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
-symfony console doctrine:fixtures:load
+symfony console doctrine:fixtures:load --no-interaction
 symfony serve -d
 ````
 
